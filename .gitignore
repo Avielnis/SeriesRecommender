@@ -1,4 +1,8 @@
 .idea/
-
-
-
+Exercise1/.pytest_cache
+/Exercise3/basicsnippets/
+/Exercise3/codedescriber/.vscode/
+/Exercise3/codedescriber/node_modules/
+/Exercise3/codedescriber/py_apps/API_settings.py
+/Exercise3/codedescriber/py_apps/GPT_msg.txt
+/Exercise3/codedescriber/test/
