@@ -21,3 +21,4 @@
 1. run npm install
 2. create a file name API_setting.py and inside put the line
    openai_key = "Your API Key"
+3. create a venv folder and run '*pip install openai*'

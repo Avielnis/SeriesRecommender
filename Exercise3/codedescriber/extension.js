@@ -37,7 +37,7 @@ function generateFunctionDescription() {
 		const selection = editor.selection;
         const selectedText = editor.document.getText(selection);
 
-        const pythonProcess = spawn("python", [`${__dirname}/py_apps/GPTDescribe.py`, selectedText]);
+        const pythonProcess = spawn(`${__dirname}/venv/Scripts/python.exe`, [`${__dirname}/py_apps/GPTDescribe.py`, selectedText]);
 
         pythonProcess.stdout.on('data', (data) => {
             console.log(`stdout: ${data}`);
