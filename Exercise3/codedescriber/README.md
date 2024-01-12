@@ -1,8 +1,3 @@
-
-### README for GPTDescribe - VSCode Plugin
-
----
-
 ## Introduction
 
 **GPTDescribe** is an innovative Visual Studio Code plugin designed to enhance your coding experience by automatically generating descriptions for your functions. This plugin integrates seamlessly with VSCode, utilizing advanced AI to provide insightful, accurate, and concise explanations of your code, directly within your editor.
