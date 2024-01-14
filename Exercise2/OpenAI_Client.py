@@ -37,6 +37,7 @@ class OpenAIClient():
         # Extracting the key and value
         title = data["title"]
         description = data["description"]
+        description = description.replace('.', '.\n')
         logging.info(f"Got Title : {title} and Description : {description}")
         return title, description
 

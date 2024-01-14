@@ -35,22 +35,22 @@ class ShowSuggesterAI():
         self.propose_new_shows()
 
     def propose_new_shows(self):
+        print("\nI have also created just for you two shows which I think you would love.")
         gpt = OpenAIClient()
         input_base_title, input_base_description = gpt.get_text(self.user_input_shows)
         input_base_img_url = gpt.get_img(input_base_title, input_base_description)
-        print(f"""I have also created just for you two shows which I think you would love.
-Show #1 is based on the fact that you loved the input shows that you
-gave me. Its name is {input_base_title} and it is about {input_base_description}.""")
+        print(f"""Show #1 is based on the fact that you loved the input shows that you
+gave me. Its name is {input_base_title} and it is about {input_base_description}\n\n""")
 
         recommendations_base_title, recommendations_base_description = gpt.get_text(
             [show_name for show_name, _ in self.recommendations])
         recommendations_base_img_url = gpt.get_img(recommendations_base_title, recommendations_base_description)
         print(f"""Show #2 is based on the shows that I recommended for you.
-Its name is {recommendations_base_title} \nand it is about {recommendations_base_description}.
-Here are also the 2 tv show ads. Hope you like them!""")
+Its name is {recommendations_base_title} \nand it is about {recommendations_base_description}
+Here are also the 2 tv show ads. Hope you like them!\n\n""")
 
-        webbrowser.open(input_base_img_url)
         webbrowser.open(recommendations_base_img_url)
+        webbrowser.open(input_base_img_url)
 
     def create_suggestions(self):
         self.user_shows_vectors = [self.shows_embeddings_dict[show] for show in self.user_input_shows]
