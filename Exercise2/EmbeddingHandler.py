@@ -2,6 +2,7 @@ import csv
 import pickle
 import logging
 from OpenAI_Client import OpenAIClient
+import os
 
 
 class EmbeddingHandler():
@@ -30,15 +31,15 @@ class EmbeddingHandler():
             pickle.dump(self.embeddings, file)
 
 
-def main():
-    openai_client = OpenAIClient()
-    show_suggester = EmbeddingHandler(openai_client)
-    show_suggester.load_shows("imdb_tvshows-imdb_tvshows.csv")
-    show_suggester.calculate_embeddings()
-
-
 def load_shows_embeddings():
-    with open('embeddings.pickle', 'rb') as file:
+    embeddings_file = "embeddings.pickle"
+
+    if not os.path.exists(embeddings_file):
+        openai_client = OpenAIClient()
+        show_suggester = EmbeddingHandler(openai_client)
+        show_suggester.load_shows("imdb_tvshows-imdb_tvshows.csv")
+
+    with open(embeddings_file, 'rb') as file:
         data = pickle.load(file)
         return data
 
