@@ -1,7 +1,7 @@
 import csv
 import pickle
 import logging
-from OpenAI_Client import OpenAIEmbeddingsClient
+from OpenAI_Client import OpenAIClient
 
 
 class EmbeddingHandler():
@@ -31,7 +31,7 @@ class EmbeddingHandler():
 
 
 def main():
-    openai_client = OpenAIEmbeddingsClient()
+    openai_client = OpenAIClient()
     show_suggester = EmbeddingHandler(openai_client)
     show_suggester.load_shows("imdb_tvshows-imdb_tvshows.csv")
     show_suggester.calculate_embeddings()
