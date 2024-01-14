@@ -2,6 +2,9 @@ import csv
 import pickle
 from settings import OPENAI_API_KEY
 from openai import OpenAI
+import logging
+
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
 class OpenAIEmbeddingsClient():
@@ -12,7 +15,7 @@ class OpenAIEmbeddingsClient():
 
     def get_embedding(self, text):
         text = text.replace("\n", " ")
-        return self.client.embeddings.create(input = [text], model=self.model).data[0].embedding
+        return self.client.embeddings.create(input=[text], model=self.model).data[0].embedding
 
 
 class ShowSuggesterAI():
@@ -20,30 +23,33 @@ class ShowSuggesterAI():
         self.openai_client = openai_client
         self.shows = {}
         self.embeddings = {}
-    
+
     def load_shows(self, shows_file_path):
-        with open(shows_file_path, newline="") as f:
+        with open(shows_file_path, newline="", encoding='utf-8') as f:
             reader = csv.reader(f)
-            # reader.__next__()
+            reader.__next__()
             for row in reader:
                 self.shows[row[0]] = row[1]
+        logging.info(self.shows.keys())
 
-    def calculate_embeddings(self, embeddings_file_path):
+    def calculate_embeddings(self):
+        embeddings_file_path = 'embeddings.pickle'
         for show in self.shows:
             show_description = self.shows[show]
             self.embeddings[show] = self.openai_client.get_embedding(show_description)
-        
-        # save embeddings to file using pickle
-        with open('my_dict.pickle', 'wb') as file:
-            pickle.dump(embeddings_file_path, file)
-    
+            logging.info(f"{self.embeddings[show]}")
+
+            # save embeddings to file using pickle
+        with open(embeddings_file_path, 'wb') as file:
+            pickle.dump(self.embeddings, file)
 
 
 def main():
     openai_client = OpenAIEmbeddingsClient(OPENAI_API_KEY)
     show_suggester = ShowSuggesterAI(openai_client)
-    show_suggester.load_shows(r"C:\Users\rlapu\Desktop\Univeristy\Software-Development-Using-AI\Assignment-2\Exercise2\imdb_tvshows-imdb_tvshows.csv")
-    print(show_suggester.shows)
+    show_suggester.load_shows("imdb_tvshows-imdb_tvshows.csv")
+    show_suggester.calculate_embeddings()
+
 
 if __name__ == "__main__":
     main()
