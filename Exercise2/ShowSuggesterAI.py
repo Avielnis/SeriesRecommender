@@ -8,7 +8,7 @@ import webbrowser
 logging.basicConfig(filename='logs.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
-class ShowSuggesterAI():
+class ShowSuggesterAI:
 
     def __init__(self):
         self.shows_embeddings_dict = EmbeddingHandler.load_shows_embeddings()
@@ -39,14 +39,18 @@ class ShowSuggesterAI():
         gpt = OpenAIClient()
         input_base_title, input_base_description = gpt.get_text(self.user_input_shows)
         input_base_img_url = gpt.get_img(input_base_title, input_base_description)
-        print(f"""Show #1 is based on the fact that you loved the input shows that you
-gave me. Its name is {input_base_title} and it is about {input_base_description}\n\n""")
+
+        print(f"""Show #1 is based on the fact that you loved the input shows that you gave me. 
+Name: {input_base_title}
+Description: {input_base_description}\n\n""")
 
         recommendations_base_title, recommendations_base_description = gpt.get_text(
             [show_name for show_name, _ in self.recommendations])
         recommendations_base_img_url = gpt.get_img(recommendations_base_title, recommendations_base_description)
+
         print(f"""Show #2 is based on the shows that I recommended for you.
-Its name is {recommendations_base_title} \nand it is about {recommendations_base_description}
+Name: {recommendations_base_title}
+Description: {recommendations_base_description}
 Here are also the 2 tv show ads. Hope you like them!\n\n""")
 
         webbrowser.open(recommendations_base_img_url)

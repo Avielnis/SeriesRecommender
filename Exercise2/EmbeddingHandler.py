@@ -5,7 +5,7 @@ from OpenAI_Client import OpenAIClient
 import os
 
 
-class EmbeddingHandler():
+class EmbeddingHandler:
     def __init__(self, openai_client):
         self.openai_client = openai_client
         self.shows = {}
@@ -44,5 +44,8 @@ def load_shows_embeddings():
         return data
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     openai_client = OpenAIClient()
+#     show_suggester = EmbeddingHandler(openai_client)
+#     show_suggester.load_shows("imdb_tvshows-imdb_tvshows.csv")
+#     show_suggester.calculate_embeddings()

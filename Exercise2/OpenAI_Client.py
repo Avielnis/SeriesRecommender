@@ -5,7 +5,7 @@ from settings import OPENAI_API_KEY
 from openai import OpenAI
 
 
-class OpenAIClient():
+class OpenAIClient:
     def __init__(self, ):
         self.client = OpenAI(api_key=OPENAI_API_KEY)
         self.embeddings = {}
@@ -55,9 +55,9 @@ class OpenAIClient():
         return image_url
 
 
-if __name__ == '__main__':
-    gpt = OpenAIClient()
-    title, desp = gpt.get_text(["game of thrones", "witcher"])
-    url = gpt.get_img(title, desp)
-    logging.info(url)
-    print(url)
+# if __name__ == '__main__':
+#     gpt = OpenAIClient()
+#     title, desp = gpt.get_text(["game of thrones", "witcher"])
+#     url = gpt.get_img(title, desp)
+#     logging.info(url)
+#     print(url)
