@@ -8,9 +8,7 @@ import webbrowser
 logging.basicConfig(filename='logs.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
-
 class ShowSuggesterAI:
-
     def __init__(self):
         self.shows_embeddings_dict = EmbeddingHandler.load_shows_embeddings()
         self.user_input_shows = []
