@@ -23,20 +23,25 @@ class OpenAIEmbeddingsClient():
         #          f"in this format:" \
         #          f"Title: the title" \
         #          f"Description : the description"
-        prompt = f"Here is a list of TV series: {','.join(lst)}" \
-                 "Based on this list, output a new TV series that doesn't exist that might be similar. " \
-                 "Give a short paragraph about the story plot" \
-                 " Your output should be in the following format: {Title} : {Description} as a JSON"
+        prompt = f"""Here is a list of TV series: {','.join(lst)}. Based on this list, 
+            output a new TV series that doesn't exist that might be similar.
+            Give a short paragraph about the story plot. Your output should be in the following JSON format: 
+            "title" : "<Title>", 
+            "description" : "<description>"
+            """
 
-        response = self.client.chat.completions.create(messages=[{"role": "user", "content": prompt}],
-                                                       model=self.text_model,
-                                                       response_format={"type": "json_object"}).choices[0].message.content
+        response = self.client.chat.completions.create(
+            messages=[{"role": "user", "content": prompt}],
+            model=self.text_model,
+            response_format={"type": "json_object"}
+            ).choices[0].message.content
+        
         logging.info(response)
         data = json.loads(response)
 
         # Extracting the key and value
-        title = list(data.keys())[0]
-        description = data[title]
+        title = data["title"]
+        description = data["description"]
         return title, description
 
 
