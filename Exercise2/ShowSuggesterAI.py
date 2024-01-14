@@ -8,6 +8,7 @@ import webbrowser
 logging.basicConfig(filename='logs.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
+
 class ShowSuggesterAI:
 
     def __init__(self):
