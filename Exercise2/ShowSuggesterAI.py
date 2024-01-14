@@ -12,7 +12,6 @@ class ShowSuggesterAI:
     def __init__(self):
         self.shows_embeddings_dict = EmbeddingHandler.load_shows_embeddings()
         self.user_input_shows = []
-        self.user_shows_vectors = []
         self.recommendations = []
 
     def run(self):
@@ -24,7 +23,7 @@ class ShowSuggesterAI:
             self.user_input_shows = [process.extractOne(show, self.shows_embeddings_dict.keys())[0] for show in
                                      user_loved_show]
 
-            user_verify = input(f"Just to make sure, do you mean {','.join(self.user_input_shows)} ?(y/n)\n") == 'y'
+            user_verify = input(f"Just to make sure, do you mean {', '.join(self.user_input_shows)} ?(y/n)\n") == 'y'
             if not user_verify:
                 print("Sorry about that. Lets try again, please make sure to write the names of the tv shows correctly")
         print("“Great! Generating recommendations…")
@@ -56,8 +55,8 @@ Here are also the 2 tv show ads. Hope you like them!\n\n""")
         webbrowser.open(input_base_img_url)
 
     def create_suggestions(self):
-        self.user_shows_vectors = [self.shows_embeddings_dict[show] for show in self.user_input_shows]
-        average_vector = np.mean(self.user_shows_vectors, axis=0)
+        user_shows_vectors = [self.shows_embeddings_dict[show] for show in self.user_input_shows]
+        average_vector = np.mean(user_shows_vectors, axis=0)
         logging.info(average_vector)
 
         distances = []
@@ -81,7 +80,7 @@ Here are also the 2 tv show ads. Hope you like them!\n\n""")
 
     @staticmethod
     def normalize_tuples(tuples):
-        second_elements = [x[1] for x in tuples]
+        second_elements = [round(x[1], 2) for x in tuples]
         max_val = max(second_elements)
         divisor = max_val + 0.01
         normalized_elements = [(x / divisor) for x in second_elements]

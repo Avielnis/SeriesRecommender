@@ -7,4 +7,7 @@ Exercise1/.pytest_cache
 /Exercise3/codedescriber/test/
 /Exercise3/codedescriber/venv/
 /Exercise2/settings.py
+/Exercise2/logs.log
 /embeds.txt
+settings.json
+.coverage
