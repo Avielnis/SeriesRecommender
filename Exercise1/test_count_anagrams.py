@@ -1,5 +1,4 @@
 import time
-
 import pytest
 from word_tools import count_anagrams
 

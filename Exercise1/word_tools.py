@@ -1,10 +1,10 @@
 import itertools
-import time
 
 
 def count_anagrams(text: str, word: str):
     if not text or not word:
         return 0
+    
     word_len = len(word)
 
     anagrams = set(''.join(p) for p in itertools.permutations(word))
@@ -13,4 +13,5 @@ def count_anagrams(text: str, word: str):
     count = 0
     for anagram in anagrams:
         count += text_permutations.count(anagram)
+        
     return count
