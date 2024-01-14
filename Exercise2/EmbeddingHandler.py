@@ -1,21 +1,7 @@
 import csv
 import pickle
-from settings import OPENAI_API_KEY
-from openai import OpenAI
 import logging
-
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
-
-
-class OpenAIEmbeddingsClient():
-    def __init__(self, api_key):
-        self.client = OpenAI(api_key=api_key)
-        self.embeddings = {}
-        self.model = "text-embedding-ada-002"
-
-    def get_embedding(self, text):
-        text = text.replace("\n", " ")
-        return self.client.embeddings.create(input=[text], model=self.model).data[0].embedding
+from OpenAI_Client import OpenAIEmbeddingsClient
 
 
 class EmbeddingHandler():
@@ -45,7 +31,7 @@ class EmbeddingHandler():
 
 
 def main():
-    openai_client = OpenAIEmbeddingsClient(OPENAI_API_KEY)
+    openai_client = OpenAIEmbeddingsClient()
     show_suggester = EmbeddingHandler(openai_client)
     show_suggester.load_shows("imdb_tvshows-imdb_tvshows.csv")
     show_suggester.calculate_embeddings()
@@ -55,6 +41,7 @@ def load_shows_embeddings():
     with open('embeddings.pickle', 'rb') as file:
         data = pickle.load(file)
         return data
+
 
 if __name__ == "__main__":
     main()
