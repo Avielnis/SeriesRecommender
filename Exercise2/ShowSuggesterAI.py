@@ -15,18 +15,18 @@ class ShowSuggesterAI:
         self.recommendations = []
 
     def run(self):
-        user_verify = False
-        while not user_verify:
+        user_verified = False
+        while not user_verified:
             user_loved_show = input(
                 "Which TV shows did you love watching? Separate them by a comma. Make sure to enter more than 1 show\n")
             user_loved_show = user_loved_show.split(',')
             self.user_input_shows = [process.extractOne(show, self.shows_embeddings_dict.keys())[0] for show in
                                      user_loved_show]
 
-            user_verify = input(f"Just to make sure, do you mean {', '.join(self.user_input_shows)} ?(y/n)\n") == 'y'
-            if not user_verify:
+            user_verified = input(f"Just to make sure, do you mean {', '.join(self.user_input_shows)} ?(y/n)\n") == 'y'
+            if not user_verified:
                 print("Sorry about that. Lets try again, please make sure to write the names of the tv shows correctly")
-        print("“Great! Generating recommendations…")
+        print("Great! Generating recommendations…")
 
         self.create_suggestions()
         self.propose()

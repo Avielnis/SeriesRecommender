@@ -53,11 +53,3 @@ class OpenAIClient:
         image_url = response.data[0].url
         logging.info(f"image url crate for {title} : {description} -> {image_url}")
         return image_url
-
-
-# if __name__ == '__main__':
-#     gpt = OpenAIClient()
-#     title, desp = gpt.get_text(["game of thrones", "witcher"])
-#     url = gpt.get_img(title, desp)
-#     logging.info(url)
-#     print(url)

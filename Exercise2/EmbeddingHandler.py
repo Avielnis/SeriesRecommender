@@ -42,10 +42,3 @@ def load_shows_embeddings():
     with open(embeddings_file, 'rb') as file:
         data = pickle.load(file)
         return data
-
-
-# if __name__ == "__main__":
-#     openai_client = OpenAIClient()
-#     show_suggester = EmbeddingHandler(openai_client)
-#     show_suggester.load_shows("imdb_tvshows-imdb_tvshows.csv")
-#     show_suggester.calculate_embeddings()
